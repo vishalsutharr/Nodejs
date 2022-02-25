@@ -1,0 +1,317 @@
+<html>
+  <head></head>
+  <body>
+      <fieldset>
+        <legend>
+          <b>Basic Details</b>
+        </legend>
+        <table cellspacing="10" align="center">
+          <tr>
+            <td>
+              <label for="firstname">First Name:</label>
+            </td>
+            <td>
+              <input type="text" name="firstname" id="firstname" value="<%=data[0].fname%>" readonly/><br />
+            </td>
+            <td>
+              <label for="lastname">Last Name:</label>
+            </td>
+            <td>
+              <input type="text" name="lastname" id="lastname" value="<%=data[0].lname%>" readonly/><br />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="designation">Designation:</label>
+            </td>
+            <td>
+              <input type="text" name="designation" id="designation" value="<%=data[0].designation%>" readonly/><br />
+              
+            </td>
+            <td>
+              <label for="addr1">Address Line 1:</label>
+            </td>
+            <td>
+              <input type="text" name="addr1" id="addr1" value="<%=data[0].add1%>" readonly/><br />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="email">Email:</label>
+            </td>
+            <td>
+              <input type="text" name="email" id="email" value="<%=data[0].email%>" readonly/><br />
+              
+            </td>
+            <td>
+              <label for="addr2">Address Line 2:</label>
+            </td>
+            <td>
+              <input type="text" name="addr2" id="addr2" value="<%=data[0].add2%>" readonly/><br />
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="phone">Phone Number:</label>
+            </td>
+            <td>
+              <input type="text" name="phone" id="phone" value="<%=data[0].phoneno%>" readonly/><br />
+              
+            </td>
+            <td>
+              <label for="city">City:</label>
+            </td>
+            <td>
+              <input type="text" name="city" id="city" value="<%=data[0].cityname%>" readonly/><br />
+            </td>
+          </tr>
+          <tr>
+            <td >
+              <label for="gender">Gender:</label>
+            </td>
+            <td >
+              <input type="text" name="gender" id="gender" value="<%=data[0].gender%>" readonly/><br />
+            </td>
+            <td>
+              <label for="zip">Zip Code: </label>
+            </td>
+            <td>
+              <input type="text" name="zip" id="zip" value="<%=data[0].zip%>" readonly/><br />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="state">State: </label>
+            </td>
+            <td>
+              <input type="text" name="state" id="state" value="<%=data[0].statename%>" readonly/><br />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="materialStatus">Material status:</label>
+            </td>
+            <td>
+              <%if(data[0].marital_statusid==3){%>
+              <select name="materialStatus" id="materialStatus" disabled>
+                <option value="-1">Select</option>
+                <option value="3" selected>Single</option>
+                <option value="4">Married</option>
+              </select>
+              <br />
+              <%}%>
+              <%if(data[0].marital_statusid==4){%>
+                <select name="materialStatus" id="materialStatus" disabled>
+                  <option value="-1">Select</option>
+                  <option value="3" >Single</option>
+                  <option value="4" selected>Married</option>
+                </select>
+                <br />
+                <%}%>
+              <!-- <input type="text" name="state" id="state" value="<%=data[0].marital_statusid%>" readonly/><br /> -->
+            </td>
+            <td>
+              <label for="dob">Date of Birth:</label>
+            </td>
+            <td>
+              <input type="text" name="dob" id="dob" value="<%=(data[0].dob).toISOString().slice(0,10)%>" readonly/><br />
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <br /><br />
+
+      <fieldset>
+        <legend><b>Education Details</b></legend>
+        <table cellspacing="10" id="eductaionTable" align="center">
+          <% for (var i=0; i<edudata.length; i++) {%>
+          <tr id="edu1">
+            <td>
+              <label for="courseName1">Course: </label>
+              <input type="text" name="courseName<%=i%>" id="courseName<%=i%>" value="<%=edudata[i].o_name%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="universityName1">University:</label>
+              <input type="text" name="universityName<%=i%>" id="universityName<%=i%>" value="<%=edudata[i].uni_board%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="passingYear1">Passing Year: </label>
+              <input type="text" name="passingYear<%=i%>" id="passingYear<%=i%>" value="<%=edudata[i].passingyear%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="percentage1">Percentage: </label>
+              <input type="text" name="percentage<%=i%>" id="percentage<%=i%>" value="<%=edudata[i].percentage%>" readonly/>
+            </td>
+  
+          </tr>
+          <%}%>
+        </table>
+      </fieldset>
+      <br /><br />
+
+      <fieldset>
+        <legend>
+          <b>Work Experience</b>
+        </legend>
+        <table id="workExTable" cellspacing="10" align="center">
+          <% for (var i=0; i<workexpdata.length; i++) {%>
+          <tr id="wx1">
+            <td>
+              <label for="companyName1">Comapny Name:</label>
+              <input type="text" name="companyName<%=i%>" id="companyName<%=i%>" value="<%=workexpdata[i].company_name%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="designation1">Designation:</label>
+              <input type="text" name="designation<%=i%>" id="designation<%=i%>" value="<%=workexpdata[i].designation%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="from1">From:</label>
+              <input type="date" name="from<%=i%>" id="from<%=i%>" value="<%=(workexpdata[i].fromdate).toISOString().slice(0,10)%>" readonly/>
+            </td>
+  
+            <td>
+              <label for="to1">To:</label>
+              <input type="date" name="to<%=i%>" id="to<%=i%>" value="<%=(workexpdata[i].todate).toISOString().slice(0,10)%>" readonly/>
+              <br />
+            </td>
+  
+          </tr>
+          <%}%>
+        </table>
+  
+      </fieldset>
+      <br /><br />
+
+      <table align="center">
+        <tr>
+          <td>
+            <fieldset>
+              <legend>
+                <b>Language Known</b>
+              </legend>
+              <table cellspacing="10" align="center">
+                <%for(var i=0; i< langdata.length ;i++){%>
+                  <tr>
+                    <td><input type="checkbox" id="<%=langdata[i].oid%>" name="chk<%=langdata[i].o_name%>but" value="<%=langdata[i].oid%>" checked disabled><%=langdata[i].o_name%></input></td>
+                    <td>
+                      <input type="checkbox" id="chk<%=langdata[i].o_name%>read" name="chk<%=langdata[i].o_name%>read" value="read" disabled/> Read
+                      <input type="checkbox" id="chk<%=langdata[i].o_name%>write" name="chk<%=langdata[i].o_name%>write" value="write" disabled/> Write
+                      <input type="checkbox" id="chk<%=langdata[i].o_name%>speak" name="chk<%=langdata[i].o_name%>speak" value="speak" disabled/> Speak
+                    </td>
+                  </tr>
+                  <%}%>
+              </table>
+            </fieldset>
+          </td>
+  
+          <td>
+            <fieldset>
+              <legend><b>Technology Known</b></legend>
+              <table cellspacing="10" align="center">
+                <%for(var i=0;i<techdata.length;i++){%>
+                  <tr>
+                    <td><input type="checkbox" id="<%=techdata[i].oid%>" name="chk<%=techdata[i].o_name%>but" value="<%=techdata[i].oid%>" checked disabled/> <%=techdata[i].o_name%></td>
+                    <td>
+                      <input type="radio" id="chk<%=techdata[i].o_name%>beginer" name="rb<%=techdata[i].o_name%>" value="Beginer" disabled/> Beginer
+                      <input type="radio" id="chk<%=techdata[i].o_name%>mediator" name="rb<%=techdata[i].o_name%>" value="Mediator" disabled/> Mediator
+                      <input type="radio" id="chk<%=techdata[i].o_name%>expert" name="rb<%=techdata[i].o_name%>" value="Expert" disabled/> Expert
+                    </td>
+                  </tr>
+                  <%}%>
+              </table>
+            </fieldset>
+          </td>
+        </tr>
+      </table>
+      <br /><br />
+
+      <fieldset>
+        <legend><b>Refeneces</b></legend>
+        
+        <table cellspacing="10" id="refTable" align="center">
+          <% for (var i=0; i<refdata.length; i++) {%>
+          <tr id="ref<%=i%>">
+            <td>
+              <label for="refName<%=i%>">Name:</label>
+              <input type="text" name="refName<%=i%>" id="refName<%=i%>" value="<%=refdata[i].refname%>" readonly/>
+            </td>
+            <td>
+              <label for="refcontact<%=i%>">Contact Number:</label>
+              <input type="tel" name="refContact<%=i%>" id="refContact<%=i%>" value="<%=refdata[i].contactno%>" readonly/>
+            </td>
+            <td>
+              <label for="refRelation<%=i%>">Relation:</label>
+              <input type="text" name="refRelation<%=i%>" id="refRelation<%=i%>" value="<%=refdata[i].relation%>" readonly/>
+            </td>
+          </tr>
+          <%}%>
+        </table>
+        
+      </fieldset>
+  
+      <br />
+      <br />
+
+      <fieldset>
+        <legend><b>Preference</b></legend>
+        <table cellspacing="10" align="center">
+          <tr>
+            <td rowspan="4">
+              <label for="location">Prefered Location:</label>
+            </td>
+            <td rowspan="4">
+              <select name="location" id="location" multiple class="chosen-select" disabled>
+                <option value=""></option>
+                <%for(var i=0;i<prefdata.length;i++){%>
+                  <option value="<%=prefdata[i].oid%>"><%=prefdata[i].o_name%></option>
+                  <%}%>
+              </select>
+            </td>
+            <td>
+              <label for="noticePeriod">Notice Period:</label>
+            </td>
+            <td>
+              <input type="text" name="noticePeriod" id="" placeholder="in Months" value="<%=prefdata[0].noticeperiod%>" readonly/>
+            </td>
+            <td rowspan="4">
+              <label for="department">Department:</label>
+            </td>
+            <td rowspan="4">
+              <input type="text" name="deptname" id="" value="<%=prefdata1[0].o_name%>" readonly/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="currentCTC">Current CTC:</label>
+            </td>
+            <td>
+              <input type="number" name="currentCTC" id="" value="<%=prefdata[0].currentctc%>" readonly/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="expectedCTC">Expected CTC:</label>
+            </td>
+            <td>
+              <input type="number" name="expectedCTC" id="" value="<%=prefdata[0].expectedctc%>" readonly/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="resume">Upload Resume:</label>
+            </td>
+            <td>
+              <input type="file" name="resume" id="resume" disabled/>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <br /><br />
+  </body>
+</html>

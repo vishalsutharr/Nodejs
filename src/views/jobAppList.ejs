@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      .hd{
+        visibility: hidden;
+      }
+    </style>
+    <style>
+      a.button {
+       display: inline-block;
+        padding: 1em 3em;
+        border-radius: 5px;
+        text-decoration: none;
+        color: white;
+        background-color: #4E9CAF;
+}
+      table{
+        width: 100%;
+        border-collapse: collapse;
+        margin:50px 0px;
+      }
+      table, th, td {
+        border: 1px solid black;
+      }
+      th{
+        padding: 10px;
+        background-color: lightgray;
+      }
+      td{
+        padding:10px
+      }
+    </style>
+  </head>
+  <body>
+    <br>
+    <div>
+      <a class="btn btn-primary" href="/wiz">Add new user</a>
+    </div>
+    <table>
+      <tr>
+        <th>Job ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Address 1</th>
+        <th>Address 2</th>
+        <!-- <th>City ID</th> -->
+        <th>Contact </th>
+        <th>Zip code</th>
+        <th>Dob</th>
+        <!-- <th>Gender ID</th> -->
+        <!-- <th>State ID</th> -->
+        <!-- <th>Marital_StatusID</th> -->
+        <th>Form Details</th>
+        <th>Action</th>
+      </tr>
+      <%for(var i=0;i<data.length;i++){%>
+        <tr>
+          <td><%=data[i].jobid %></td>
+          <td><%=data[i].fname %> <%=data[i].lname %></td>
+          <td><%=data[i].email %></td>
+          <td><%=data[i].add1 %></td>
+          <td><%=data[i].add2 %></td>
+          <!-- <td><%=data[i].cityid %></td>  -->
+          <td><%=data[i].phoneno %></td>
+          <td><%=data[i].zip %></td>
+          <td><%=(data[i].dob).toLocaleDateString("en-US") %></td>
+          <!-- <td><%=data[i].genderid %></td> -->
+          <!-- <td><%=data[i].stateid %></td> -->
+          <!-- <td><%=data[i].marital_statusid %></td> -->
+          <td><a class="ed btn btn-info" href="/jobAppView?jobid=<%=data[i].jobid%>" role="button">VIEW FORM</a></td>
+          <td>
+            
+            <a class="ed btn btn-secondary" href="/jobAppEdit?jobid=<%=data[i].jobid%>">EDIT</a>
+            <a class="ed btn btn-danger" href="/jobAppDelete?del_record=<%=data[i].jobid%>" onclick="return confirm('are you sure?')">DELETE</a>
+        </td>
+        </tr>
+        <%}%>
+    </table>
+  </body>
+</html>

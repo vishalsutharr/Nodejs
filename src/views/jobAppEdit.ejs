@@ -1,0 +1,810 @@
+<html>
+
+<head>
+  <style>
+    .hd{
+      visibility: hidden;
+    }
+  </style>
+  <title>Job Application Form</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">Job Application Form</h1>
+  <div id="error"></div>
+  <form action="/jobAppUpdate" method="post">
+    <fieldset>
+      <legend>
+        <b>Basic Details</b>
+      </legend>
+      <table cellspacing="10" align="center">
+        <tr>
+          <td>
+            <label for="firstname">First Name:</label>
+          </td>
+          <td>
+            <input type="text" name="firstname" id="firstname" value="<%=jobdata[0].fname%>" /><br />
+            <span id="errfirstname" style="color: red;"></span>
+          </td>
+          <td>
+            <label for="lastname">Last Name:</label>
+          </td>
+          <td>
+            <input type="text" name="lastname" id="lastname" value="<%=jobdata[0].lname%>" /><br />
+            <label id="errlastname" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="designation">Designation:</label>
+          </td>
+          <td>
+            <input type="text" name="designation" id="designation" value="<%=jobdata[0].designation%>" /><br />
+            <label id="errdesignation" style="color: red;"></label>
+          </td>
+          <td>
+            <label for="addr1">Address Line 1:</label>
+          </td>
+          <td>
+            <input type="text" name="addr1" id="addr1" value="<%=jobdata[0].add1%>" /><br />
+            <label id="erraddr1" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="email">Email:</label>
+          </td>
+          <td>
+            <input type="text" name="email" id="email" value="<%=jobdata[0].email%>" /><br />
+            <label id="erremail" style="color: red;"></label>
+          </td>
+          <td>
+            <label for="addr2">Address Line 2:</label>
+          </td>
+          <td>
+            <input type="text" name="addr2" id="addr2" value="<%=jobdata[0].add2%>" /><br />
+            <label id="erraddr2" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="phone">Phone Number:</label>
+          </td>
+          <td>
+            <input type="text" name="phone" id="phone" value="<%=jobdata[0].phoneno%>" /><br />
+            <label id="errphone" style="color: red;"></label>
+          </td>
+          <td>
+            <label for="city">City:</label>
+          </td>
+          <td>
+
+            <select name="city" id="city">
+              <option value="-1">Select city</option>
+              <%for(var i=0;i<cities.length;i++){%>
+                <%if(cities[i].cityname==jobdata[0].cityname){%>
+                  <option value="<%=cities[i].cityid%>" selected>
+                    <%=cities[i].cityname%>
+                  </option>
+                  <%} else {%>
+                    <option value="<%=cities[i].cityid%>">
+                      <%=cities[i].cityname%>
+                    </option>
+                    <%}%>
+                      <%}%>
+            </select><br />
+
+            <label id="errcity" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="2">
+            <label for="gender">Gender:</label>
+          </td>
+          <td rowspan="2">
+            <%if(jobdata[0].gender=='Male' ){%>
+              <input type="radio" name="gender" value="1" id="1" checked /> Male
+              <input type="radio" name="gender" value="2" id="2" /> Female<br />
+              <%} else if(jobdata[0].gender=='Female' ){%>
+                <input type="radio" name="gender" value="1" id="1" /> Male
+                <input type="radio" name="gender" value="2" id="2" checked /> Female<br />
+                <%}%>
+                  <label id="errgender" style="color: red;"></label>
+          </td>
+          <td>
+            <label for="zip">Zip Code: </label>
+          </td>
+          <td>
+            <input type="number" name="zip" id="zip" value="<%=jobdata[0].zip%>"/><br />
+            <label id="errzip" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="state">State: </label>
+          </td>
+          <td>
+            <select name="state" id="state">
+              <option value="-1">Select state</option>
+              <%for(var i=0;i<data.length;i++){%>
+                <%if(data[i].statename==jobdata[0].statename){%>
+                <option value="<%=data[i].stateid%>" selected>
+                  <%=data[i].statename%>
+                </option>
+                <%} else {%>
+                  <option value="<%=data[i].stateid%>" >
+                    <%=data[i].statename%>
+                  </option>
+                  <%}%>
+                <%}%>
+            </select><br />
+            <label id="errstate" style="color: red;"></label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="materialStatus">Material status:</label>
+          </td>
+          <td>
+            <select name="materialStatus" id="materialStatus">
+              <option value="-1">Select</option>
+              <%if(jobdata[0].marital_statusid == 3){%>
+              <option value="3" selected>Single</option>
+              <option value="4">Married</option>
+              <%} else {%>
+                <option value="3" >Single</option>
+              <option value="4" selected>Married</option>
+              <%}%>
+            </select>
+            <br />
+            <label id="errmaterialStatus" style="color: red;"></label>
+          </td>
+          <td>
+            <label for="dob">Date of Birth:</label>
+          </td>
+          <td>
+            <input type="date" name="dob" id="dob" value="<%=(jobdata[0].dob).toISOString().slice(0,10)%>"/><br />
+            <label id="errdob" style="color: red;"></label>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <br /><br />
+
+    <fieldset>
+      <legend><b>Education Details</b></legend>
+      <table cellspacing="10" id="eductaionTable" align="center">
+        <% for (var i=0; i<edudata.length; i++) {%>
+          <input type="hidden" value="<%=i%>" name="education" id="education"></input>
+        <tr id="edu<%=i%>">
+          <td>
+            <label for="courseName<%=i%>">Course: </label>
+            <select name="courseName<%=i%>" id="courseName<%=i%>">
+              <option value="select" selected disabled>Select</option>
+              <%for(var j=0;j<edu_ct.length;j++){%>
+                <%if(edu_ct[j].o_name == edudata[i].o_name){%>
+                <option selected value="<%=edu_ct[j].oid%>"> 
+                  <%=edu_ct[j].o_name%>
+                </option>
+                <%} else {%>
+                  <option value="<%=edu_ct[j].oid%>"> 
+                    <%=edu_ct[j].o_name%>
+                  </option>
+                  <%}%>
+              <%}%>
+            </select>
+          </td>
+
+          <td>
+            <label for="universityName<%=i%>">University:</label>
+            <input type="text" name="universityName<%=i%>" id="universityName<%=i%>" value="<%=edudata[i].uni_board%>"/>
+          </td>
+
+          <td>
+            <label for="passingYear<%=i%>">Passing Year: </label>
+            <input type="text" name="passingYear<%=i%>" id="passingYear<%=i%>" value="<%=edudata[i].passingyear%>"/>
+          </td>
+
+          <td>
+            <label for="percentage<%=i%>">Percentage: </label>
+            <input type="text" name="percentage<%=i%>" id="percentage<%=i%>" value="<%=edudata[i].percentage%>"/>
+          </td>
+
+          <!-- remove button -->
+          <td colspan="2">
+            <input type="button" value="-" name="removeRow<%=i%>" id="removeRow<%=i%>" onclick="onRemoveRow('edu1')" />
+          </td>
+        </tr>
+        <%}%>
+      </table>
+
+      <!-- add button -->
+      <table cellspacing="10" align="right">
+        <tr>
+          <td>
+            <input  class="hd" type="text" name="edurows" id="edurows" />
+            <input type="button" value="Add Row" name="addRow" id="addRow" onclick="onAddEduRow()" />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <br /><br />
+    <fieldset>
+      <legend>
+        <b>Work Experience</b>
+      </legend>
+      <table id="workExTable" cellspacing="10" align="center">
+        <% for (var i=0; i<workexpdata.length; i++) {%>
+        <tr id="wx1">
+          <td>
+            <label for="companyName1">Comapny Name:</label>
+            <input type="text" name="companyName1" id="companyName1" value="<%=workexpdata[i].company_name%>"/>
+          </td>
+
+          <td>
+            <label for="designation1">Designation:</label>
+            <input type="text" name="designation1" id="designation1" value="<%=workexpdata[i].designation%>"/>
+          </td>
+
+          <td>
+            <label for="from1">From:</label>
+            <input type="date" name="from1" id="from1" value="<%=(workexpdata[i].fromdate).toISOString().slice(0,10)%>"/>
+          </td>
+
+          <td>
+            <label for="to1">To:</label>
+            <input type="date" name="to1" id="to1" value="<%=(workexpdata[i].todate).toISOString().slice(0,10)%>"/>
+            <br />
+            <label id="errduration" style="color: red;"></label>
+          </td>
+
+          <!-- remove button -->
+          <td colspan="2">
+            <input type="button" value="-" name="removeRow1" id="removeRow1" onclick="onRemoveRow('wx1')" />
+          </td>
+        </tr>
+        <%}%>
+      </table>
+
+      <!-- add button -->
+      <table cellspacing="10" align="right">
+        <tr>
+          <td>
+            <input  class="hd" type="text" name="wexrows" id="wexrows" />
+            <input type="button" value="Add Row" name="addRow" id="addRow" onclick="onAddwxRow()" />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <br /><br />
+
+    <table align="center">
+      <tr>
+        <td>
+          <fieldset>
+            <legend>
+              <b>Language Known</b>
+            </legend>
+            <table cellspacing="10" align="center">
+              <%for(var i=0;i<langknown.length ;i++){ var flag = 0;%>
+                  <%for(var j=0;j<langdata.length ;j++) {%>
+                    <%if(langknown[i].o_name == langdata[j].o_name) flag=1 }%>
+                    <%if(flag==1) {%>
+                    <tr>
+                      <td><input type="checkbox" id="<%=langknown[i].oid%>" checked  name="chk<%=langknown[i].o_name%>but"
+                          value="<%=langknown[i].oid%>">
+                        <%=langknown[i].o_name%></input>
+                      </td>
+                      <td>
+                        <input type="checkbox" id="chk<%=langknown[i].o_name%>read" name="chk<%=langknown[i].o_name%>read"
+                          value="read" /> Read
+                        <input type="checkbox" id="chk<%=langknown[i].o_name%>write" name="chk<%=langknown[i].o_name%>write"
+                          value="write" /> Write
+                        <input type="checkbox" id="chk<%=langknown[i].o_name%>speak" name="chk<%=langknown[i].o_name%>speak"
+                          value="speak" /> Speak
+                      </td>
+                    </tr>
+                    <%} else {%>
+                      <tr>
+                        <td><input type="checkbox" id="<%=langknown[i].oid%>"  name="chk<%=langknown[i].o_name%>but"
+                            value="<%=langknown[i].oid%>">
+                          <%=langknown[i].o_name%></input>
+                        </td>
+                        <td>
+                          <input type="checkbox" id="chk<%=langknown[i].o_name%>read" name="chk<%=langknown[i].o_name%>read"
+                            value="read" /> Read
+                          <input type="checkbox" id="chk<%=langknown[i].o_name%>write" name="chk<%=langknown[i].o_name%>write"
+                            value="write" /> Write
+                          <input type="checkbox" id="chk<%=langknown[i].o_name%>speak" name="chk<%=langknown[i].o_name%>speak"
+                            value="speak" /> Speak
+                        </td>
+                      </tr>
+                      <%}%>
+                <%}%>
+            </table>
+          </fieldset>
+        </td>
+
+        <td>
+          <fieldset>
+            <legend><b>Technology Known</b></legend>
+            <table cellspacing="10" align="center">
+              <%for(var i=0;i<techknown.length;i++){ var flag = 0%>
+                <%for(var j=0;j<techdata.length ;j++) {%>
+                  <%if(techknown[i].o_name == techdata[j].o_name) flag=1 }%>
+                  <%if(flag==1) {%>
+                <tr>
+                  <td><input type="checkbox" id="<%=techknown[i].oid%>" checked name="chk<%=techknown[i].o_name%>but"
+                      value="<%=techknown[i].oid%>" />
+                    <%=techknown[i].o_name%>
+                  </td>
+                  <td>
+                    <input type="radio" id="chk<%=techknown[i].o_name%>beginer" name="rb<%=techknown[i].o_name%>"
+                      value="Beginer" /> Beginer
+                    <input type="radio" id="chk<%=techknown[i].o_name%>mediator" name="rb<%=techknown[i].o_name%>"
+                      value="Mediator" /> Mediator
+                    <input type="radio" id="chk<%=techknown[i].o_name%>expert" name="rb<%=techknown[i].o_name%>"
+                      value="Expert" /> Expert
+                  </td>
+                </tr>
+                <%} else {%>
+                  <tr>
+                    <td><input type="checkbox" id="<%=techknown[i].oid%>" name="chk<%=techknown[i].o_name%>but"
+                        value="<%=techknown[i].oid%>" />
+                      <%=techknown[i].o_name%>
+                    </td>
+                    <td>
+                      <input type="radio" id="chk<%=techknown[i].o_name%>beginer" name="rb<%=techknown[i].o_name%>"
+                        value="Beginer" /> Beginer
+                      <input type="radio" id="chk<%=techknown[i].o_name%>mediator" name="rb<%=techknown[i].o_name%>"
+                        value="Mediator" /> Mediator
+                      <input type="radio" id="chk<%=techknown[i].o_name%>expert" name="rb<%=techknown[i].o_name%>"
+                        value="Expert" /> Expert
+                    </td>
+                  </tr>
+                  <%}%>
+                <%}%>
+                
+            </table>
+          </fieldset>
+        </td>
+      </tr>
+    </table>
+    <br /><br />
+
+    <fieldset>
+      <legend><b>Refeneces</b></legend>
+
+      <table cellspacing="10" id="refTable" align="center">
+        <% for (var i=0; i<refdata.length; i++) {%>
+        <tr id="ref1">
+          <td>
+            <label for="refName1">Name:</label>
+            <input type="text" name="refName1" id="refName1" value="<%=refdata[i].refname%>" />
+          </td>
+          <td>
+            <label for="refcontact1">Contact Number:</label>
+            <input type="tel" name="refContact1" id="refContact1" value="<%=refdata[i].contactno%>"/>
+          </td>
+          <td>
+            <label for="refRelation1">Relation:</label>
+            <input type="text" name="refRelation1" id="refRelation1" value="<%=refdata[i].relation%>"/>
+          </td>
+
+          <!-- remove button -->
+          <td colspan="2">
+            <input type="button" value="-" name="removeRow1" id="removeRow1" onclick="onRemoveRow('ref1')" />
+          </td>
+        </tr>
+        <%}%>
+      </table>
+
+      <!-- add row button -->
+      <table cellspacing="10" align="right">
+        <tr>
+          <td>
+            <input  class="hd" type="text" name="refsrows" id="refsrows" />
+            <input type="button" value="Add Row" name="addRow" id="addRow" onclick="onAddRefRow()" />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <br />
+    <br />
+    <fieldset>
+      <legend><b>Preference</b></legend>
+      <table cellspacing="10" align="center">
+        <tr>
+          <td rowspan="4">
+            <label for="location">Prefered Location:</label>
+          </td>
+          <td rowspan="4">
+            <select name="location" id="location" multiple class="chosen-select">
+              <option value=""></option>
+              <%for(var i=0;i<prefloccombo.length;i++){ var flag = 0%>
+                <%for(var j=0;j<prefdata.length ;j++) {%>
+                  <%if(prefloccombo[i].o_name == prefdata[j].o_name) flag=1 }%>
+                  <%if(flag==1) {%>
+                    <option selected value="<%=prefloccombo[i].oid%>">
+                      <%=prefloccombo[i].o_name%>
+                    </option>
+                    <%} else {%>
+                      <option value="<%=prefloccombo[i].oid%>">
+                        <%=prefloccombo[i].o_name%>
+                      </option>
+                      <%}%>
+                <%}%>
+            </select>
+          </td>
+          <td>
+            <label for="noticePeriod">Notice Period:</label>
+          </td>
+          <td>
+            <input type="text" name="noticePeriod" id="" placeholder="in Months" value="<%=prefdata[0].noticeperiod%>"/>
+          </td>
+          <td rowspan="4">
+            <label for="department">Department:</label>
+          </td>
+          <td rowspan="4">
+            <select name="department" id="">
+              <option value="select" selected disabled>Select</option>
+              <%for(var i=0;i<dept.length;i++){ var flag = 0%>
+                <%for(var j=0;j<prefdata1.length ;j++) {%>
+                  <%if(dept[i].o_name == prefdata1[j].o_name) flag=1 }%>
+                  <%if(flag==1) {%>
+                    <option selected value="<%=dept[i].oid%>">
+                      <%=dept[i].o_name%>
+                    </option>
+                    <%} else {%>
+                      <option value="<%=dept[i].oid%>">
+                        <%=dept[i].o_name%>
+                      </option>
+                      <%}%>
+                <%}%>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="currentCTC">Current CTC:</label>
+          </td>
+          <td>
+            <input type="number" name="currentCTC" id="" value="<%=prefdata[0].currentctc%>"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="expectedCTC">Expected CTC:</label>
+          </td>
+          <td>
+            <input type="number" name="expectedCTC" id="" value="<%=prefdata[0].expectedctc%>"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="resume">Upload Resume:</label>
+          </td>
+          <td>
+            <input type="file" name="resume" id="resume" />
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    <br /><br />
+    <table cellspacing="10" align="center">
+      <tr>
+        <td>
+          <input type="hidden" value="<%=id%>" name="jobid" id="jobid"></input>
+          <input type="submit" value="submit" name="submit" id="submit"></input>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <script type="text/JavaScript">
+    // validation
+    function checkform() {
+      
+      const fname = document.getElementById('firstname');
+      if (fname.value === "" || fname.value == null) {
+        document.getElementById('errfirstname').innerHTML = "enter first name";
+        return false;
+      }
+
+      const lname = document.getElementById('lastname');
+      if (lname.value === "" || lname.value == null) {
+        document.getElementById('errlastname').innerHTML = "enter last name";
+        return false;
+      }
+
+      const designation = document.getElementById('designation');
+      if (designation.value === "" || designation.value == null) {
+        document.getElementById('errdesignation').innerHTML = "enter designation";
+        return false;
+      }
+
+      const addr1 = document.getElementById('addr1');
+      if (addr1.value === "" || addr1.value == null) {
+        document.getElementById('erraddr1').innerHTML = "enter addr1";
+        return false;
+      }
+
+      if (addr2.value === "" || addr2.value == null) {
+        document.getElementById('erraddr2').innerHTML = "enter addr2";
+        return false;
+      }
+
+      const email = document.getElementById('email');
+      var pattern2=/^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,8})(.[a-z]{2,8})?$/; 
+      if (email.value === "" || email.value == null) {
+        document.getElementById('erremail').innerHTML = "enter email";
+        return false;
+      }
+      else if (!pattern2.test(email.value)) {
+        document.getElementById('erremail').innerHTML = "enter valid email";
+        return false;
+      }
+
+
+      var gender = document.getElementsByName('gender');
+      if(gender[0].checked==false && gender[1].checked==false)
+      {
+        document.getElementById('errgender').innerHTML = "select gender";
+        return false;
+      }
+
+      var pattern3=/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/; 
+      const phone = document.getElementById('phone');
+      if (phone.value === "" || phone.value == null ) {
+        document.getElementById('errphone').innerHTML = "enter phone number";
+        return false;
+      }
+
+      if(!((phone.value).match(pattern3)))
+      {
+        alert(phone.value);
+        document.getElementById('errphone').innerHTML = "enter valid phone number";
+        return false;
+      }
+
+      const city = document.getElementById('city');
+      if (city.value === "" || city.value == null) {
+        document.getElementById('errcity').innerHTML = "enter city";
+        return false;
+      }
+
+      const zip = document.getElementById('zip').value;
+      if(zip.length != 6 )
+      {
+        document.getElementById('errzip').innerHTML = "enter valid zipcode";
+        return false;
+      }
+      else if(zip == "")
+      {
+        document.getElementById('errzip').innerHTML = "enter zipcode";
+        return false;
+      }
+
+      const state = document.getElementById('state').value;
+      if(state == "-1")
+      {
+        document.getElementById('errstate').innerHTML = "select state";
+        return false;
+      }
+
+      const materialStatus = document.getElementById('materialStatus').value;
+      if(materialStatus == "-1")
+      {
+        
+        document.getElementById('errmaterialStatus').innerHTML = "select status";
+        return false;
+      }
+
+      const date = document.getElementById('dob');
+      if (date.value === "" || date.value == null) {
+        document.getElementById('errdob').innerHTML = "enter date";
+        return false;
+      }
+
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+      const from1 = document.getElementById('from1').value;
+      const to1 = document.getElementById('to1').value;
+      const difference = dateDiffInDays(from1, to1);
+
+      function dateDiffInDays(from1, to1) {
+      const utc1 = Date.UTC(from1.getFullYear(), from1.getMonth(), from1.getDate());
+      const utc2 = Date.UTC(to1.getFullYear(), to1.getMonth(), to1.getDate());
+
+      return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+
+
+    }
+        
+    }
+
+    
+    // education table
+    let edu_counter = 2;
+    function onAddEduRow() {
+      let table = document.getElementById("eductaionTable");
+
+      let row = table.insertRow();
+      row.id = "edu" + edu_counter;
+
+      let cell1 = row.insertCell();
+      let cell2 = row.insertCell();
+      let cell3 = row.insertCell();
+      let cell4 = row.insertCell();
+      let cell5 = row.insertCell();
+
+      cell1.innerHTML =
+        "<label for='courseName" +
+        edu_counter +
+        "'>Course: </label> <select name='courseName" +
+        edu_counter +
+        "' id='courseName" +
+        edu_counter +
+        "'>" +
+        `<option value='select' selected disabled>Select</option> <%for(var i=0;i<edu_ct.length;i++){%> <option value="<%=edu_ct[i].oid%>"><%=edu_ct[i].o_name%></option><%}%>;`
+      cell2.innerHTML =
+        "<label for='universityName" +
+        edu_counter +
+        "'>University</label>" +
+        "<input type='text' name='universityName" +
+        edu_counter +
+        "' id='universityName" +
+        edu_counter +
+        "'>";
+      cell3.innerHTML =
+        "<label for='passingYear" +
+        edu_counter +
+        "'>Passing Year: </label>" +
+        "<input type='text' name='passingYear" +
+        edu_counter +
+        "' id='passingYear" +
+        edu_counter +
+        "'>";
+      cell4.innerHTML =
+        "<label for='percentage" +
+        edu_counter +
+        "'>Percentage: </label>" +
+        "<input type='text' name='percentage" +
+        edu_counter +
+        "' id='percentage " +
+        edu_counter +
+        "'>";
+      cell5.innerHTML =
+        "<input type='button' value='-' name='removeRow" +
+        edu_counter +
+        "' id='removeRow" +
+        edu_counter +
+        "' onclick=onRemoveRow('edu" +
+        edu_counter +
+        "')>";
+
+      edu_counter = edu_counter + 1;
+      document.getElementById("edurows").value = edu_counter - 1; 
+    }
+
+    // work experience table
+    let wx_counter = 2;
+    function onAddwxRow() {
+      let table = document.getElementById("workExTable");
+
+      let row = table.insertRow();
+      row.id = "wx" + wx_counter;
+
+      let cell1 = row.insertCell();
+      let cell2 = row.insertCell();
+      let cell3 = row.insertCell();
+      let cell4 = row.insertCell();
+      let cell5 = row.insertCell();
+
+      cell1.innerHTML =
+        "<label for='companyName" +
+        wx_counter +
+        "'>Comapny Name:</label> <input type='text' name='companyName" +
+        wx_counter +
+        "' id=companyName" +
+        wx_counter +
+        "'>";
+      cell2.innerHTML =
+        "<label for='designation" +
+        wx_counter +
+        "'>Designation:</label> <input type='text' name='designation" +
+        wx_counter +
+        "' id='designation" +
+        wx_counter +
+        "'>";
+      cell3.innerHTML =
+        "<label for='from" +
+        wx_counter +
+        "'>From:</label> <input type='date' name='from" +
+        wx_counter +
+        "' id='from" +
+        wx_counter +
+        "'>";
+      cell4.innerHTML =
+        "<label for='to" +
+        wx_counter +
+        "'>To:</label> <input type='date' name='to" +
+        wx_counter +
+        "' id='to" +
+        wx_counter +
+        "'>";
+      cell5.innerHTML =
+        "<input type='button' value='-' name='removeRow" +
+        wx_counter +
+        "' id='removeRow" +
+        wx_counter +
+        "' onclick=onRemoveRow('wx" +
+        wx_counter +
+        "')>";
+
+      wx_counter = wx_counter + 1;
+      document.getElementById("wexrows").value = wx_counter - 1;
+    }
+
+    // reference table
+    let ref_counter = 2;
+    function onAddRefRow() {
+      let table = document.getElementById("refTable");
+
+      let row = table.insertRow();
+      row.id = "ref" + ref_counter;
+
+      let cell1 = row.insertCell();
+      let cell2 = row.insertCell();
+      let cell3 = row.insertCell();
+      let cell4 = row.insertCell();
+
+      cell1.innerHTML =
+        "<label for='refName" +
+        ref_counter +
+        "'>Name:</label> <input type='text' name='refName" +
+        ref_counter +
+        "' id='refName" +
+        ref_counter +
+        "'>";
+      cell2.innerHTML =
+        "<label for='refcontact" +
+        ref_counter +
+        "'>Contact Number:</label> <input type='tel' name='refContact" +
+        ref_counter +
+        "' id='refContact" +
+        ref_counter +
+        "'>";
+      cell3.innerHTML =
+        "<label for='refRelation" +
+        ref_counter +
+        "'>Relation:</label> <input type='text' name='refRelation" +
+        ref_counter +
+        "' id='refRelation" +
+        ref_counter +
+        "'>";
+      cell4.innerHTML =
+        "<td colspan='2'> <input type='button' value='-' name='removeRow" +
+        ref_counter +
+        "' id='removeRow" +
+        ref_counter +
+        "' onclick=onRemoveRow('ref" +
+        ref_counter +
+        "')> </td>";
+
+      ref_counter = ref_counter + 1;
+      document.getElementById("refsrows").value = ref_counter - 1;
+    }
+
+    function onRemoveRow(rowid) 
+    {
+      if (confirm("Are you sure you want to delete record?") == true) {
+        let row = document.getElementById(rowid);
+        row.parentNode.removeChild(row);
+      }
+    }
+  </script>
+</body>
+
+</html>

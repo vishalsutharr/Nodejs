@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="demo"></p>
+    <button onclick="load()">Surpise</button>
+    <!-- Choose Food :<select name="ss" id="ss">
+      <option id="demo1" value="Masala puff">Masala puff</option>
+      <option id="demo2" value="Masala dabeli">Masala dabeli</option>
+      <option id="demo3" value="Masala poha">Masala poha</option>
+    </select> -->
+
+    <script>
+      function load() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "hello.txt", false);
+        xhttp.send();
+        document.getElementById(
+          "demo"
+        ).innerHTML = ` Choose Food  : <select name='ss' id='ss'>
+        <option id='demo1' value='Masala puff'>Masala puff</option>
+        <option id='demo2' value='Masala dabeli'>Masala dabeli</option>
+        <option id='demo3' value='Masala poha'>Masala poha</option>
+      </select>`;
+      }
+    </script>
+  </body>
+</html>
